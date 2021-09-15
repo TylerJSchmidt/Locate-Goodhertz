@@ -2,95 +2,85 @@ import tkinter as tk
 import os
 import webbrowser
 
-#Test
-plugin_lib = [
-    'Ghz Panpot 3.component', 'Ghz Tiltshift 3.component', 'Ghz Faraday Limiter 3.component',
-    'Ghz Megaverb 3.component', 'Ghz Midside Matrix 3.component', 'Ghz Lohi 3.component',
-    'Ghz Midside 3.component', 'Ghz Vulf Compressor 3.component', 'Ghz Lossy 3.component',
-    'Ghz Tupe 3.component', 'Ghz Wow Control 3.component', 'Ghz Trem Control 3.component',
-     'Ghz Good Dither 3.component', 'Ghz CanOpener Studio 3.component', 'Ghz Tone Control 3.component'
-]
-result = []
-def find(name):
-    for files in os.listdir(r"/Library/Audio/Plug-Ins/Components"):
-        if name in files:
-         result.append(files)
-    return result
-
-def click():
-   if find("Ghz") != plugin_lib:
-       show_frame(frame2)
-       print("Plugins not found")
-   else:
-       show_frame(frame4)
-       print("installation already completed")
-
 #GUI
 window = tk.Tk()
 window.geometry('600x500')
 window.title("Goodhertz Locator")
 window.rowconfigure(0, weight=1)
 window.columnconfigure(0, weight=1)
-frame1 = tk.Frame(window)
-frame2 = tk.Frame(window)
-frame3 = tk.Frame(window)
-frame4 = tk.Frame(window)
+
+#Frames
+welcome = tk.Frame(window)
+error = tk.Frame(window)
+downloading = tk.Frame(window)
+completed = tk.Frame(window)
 
 def show_frame(frame):
     frame.tkraise()
-for frame in (frame1, frame2, frame3, frame4):
-    frame.grid(row=0,column=0,sticky="nsew")
-show_frame(frame1)
+for frame in (welcome, error, downloading, completed):
+    frame.grid(row=0, column=0,sticky="nsew")
+show_frame(welcome)
 
-#=============================Welcome_Frame
-frame1_title= tk.Label(frame1,text='Frame 1', bg="grey")
-frame1_title.pack(fill="x")
+#Functions
 
-#Greeting
-greeting = tk.Label(frame1, text="Hello, Welcome to Goodhertz Locator", bg="grey", width=25, height=5)
-greeting.pack(fill='both', side=tk.TOP, expand=True)
-#Button
-frame1_btn = tk.Button(frame1, text="Run", command= lambda: click())
-frame1_btn.pack()
+#List to compare:
+system_plugins = []
+expected_plugins = [
+    'Ghz Panpot 3.component', 'Ghz Tiltshift 3.component', 'Ghz Faraday Limiter 3.component',
+    'Ghz Megaverb 3.component', 'Ghz Midside Matrix 3.component', 'Ghz Lohi 3.component',
+    'Ghz Midside 3.component', 'Ghz Vulf Compressor 3.component', 'Ghz Lossy 3.component',
+    'Ghz Tupe 3.component', 'Ghz Wow Control 3.component', 'Ghz Trem Control 3.component',
+     'Ghz Good Dither 3.component', 'Ghz CanOpener Studio 3.component', 'Ghz Tone Control 3.component'
+]
 
-#=============================Error_Frame
-frame2_title= tk.Label(frame2,text='Frame 2', bg="grey")
-frame2_title.pack(fill="x")
+#scan_user_library() Scans the system library for installed plugins
+def scan_system_library(plugin):
+    for files in os.listdir(r"/Library/Audio/Plug-Ins/Components"):
+        if plugin in files:
+         system_plugins.append(files)
+    return system_plugins
 
-#Results
-greeting = tk.Label(frame2, text="Plugins not found", bg="grey", width=25, height=5)
-greeting.pack(fill='both', side=tk.TOP, expand=True)
+#compare_libraries() Compares the list of expected plugins vs installed plugins
+def compare_librarys():
+   if expected_plugins != scan_system_library("Ghz"):
+       show_frame(error)
+   else:
+       show_frame(completed)
 
-#Button2
-def click2():
+#download_plugins() Open's safari to "https://goodhertz.co/downloads/", clears results from system_plugins, and moves to Downloading frame
+def download_plugins():
     webbrowser.open("https://goodhertz.co/downloads/")
-    show_frame(frame3)
-    result.clear()
-    print(result)
+    system_plugins.clear()
+    show_frame(downloading)
 
-frame2_btn = tk.Button(frame2, text="Download", command=lambda:click2())
-frame2_btn.pack()
+#show_frame() Manages which frame is currently being shown
 
-#=============================Download_Frame
-frame3_title= tk.Label(frame3,text='Frame 3', bg="grey")
-frame3_title.pack(fill="x")
+#Welcome
+welcome_message = tk.Label(welcome, text="Hello, Welcome to Goodhertz Locator", bg="grey", width=25, height=5)
+welcome_message.pack(fill='both', side=tk.TOP, expand=True)
 
-#Results
-greeting = tk.Label(frame3, text="Downloading...", bg="grey", width=25, height=5)
-greeting.pack(fill='both', side=tk.TOP, expand=True)
+run_btn = tk.Button(welcome, text="Run", command= lambda: compare_librarys())
+run_btn.pack()
 
-frame3_btn = tk.Button(frame3, text="Re-run Test", command=lambda:click())
-frame3_btn.pack()
+#Error
+error_message = tk.Label(error, text="Plugins not found", bg="grey", width=25, height=5)
+error_message.pack(fill='both', side=tk.TOP, expand=True)
 
-#=============================Complete_Frame
-frame4_title= tk.Label(frame4,text='Frame 4', bg="grey")
-frame4_title.pack(fill="x")
+download_btn = tk.Button(error, text="Download", command=lambda: download_plugins())
+download_btn.pack()
 
-#Results
-greeting = tk.Label(frame4, text="Installation completed!", bg="grey", width=25, height=5)
-greeting.pack(fill='both', side=tk.TOP, expand=True)
+#Downloading
+download_message = tk.Label(downloading, text="Downloading...", bg="grey", width=25, height=5)
+download_message.pack(fill='both', side=tk.TOP, expand=True)
 
-frame4_btn = tk.Button(frame4, text="Close", command=lambda:window.destroy())
+re_run_btn = tk.Button(downloading, text="Re-run Test", command=lambda: compare_librarys())
+re_run_btn.pack()
+
+#Completed
+completed_message = tk.Label(completed, text="Installation completed!", bg="grey", width=25, height=5)
+completed_message.pack(fill='both', side=tk.TOP, expand=True)
+
+frame4_btn = tk.Button(completed, text="Close", command=lambda: window.destroy())
 frame4_btn.pack()
 
 #End
