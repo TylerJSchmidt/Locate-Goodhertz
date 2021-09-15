@@ -1,2 +1,0 @@
-# Goodhertz-Locator
-Goodhertz Locator
