@@ -40,15 +40,15 @@ def ghz_library_installed_loop():
     if ghz_library_installed():
         show_frame(completed_window)
     else:
-        download_message.config(text="Downloading   ")
+        download_title.config(text="Downloading   ")
         time.sleep(1)
-        download_message.config(text="Downloading.  ")
+        download_title.config(text="Downloading.  ")
         time.sleep(1)
-        download_message.config(text="Downloading.. ")
+        download_title.config(text="Downloading.. ")
         time.sleep(1)
-        download_message.config(text="Downloading...")
+        download_title.config(text="Downloading...")
         time.sleep(1)
-        ghz_library_installed_loop
+        ghz_library_installed_loop()
 
 
 # Opens a finder window to /Library/Audio/Plug-Ins/Components
@@ -58,7 +58,7 @@ def open_finder():
 
 # Root Configuration
 root = Tk()
-root.title("Goodhertz Locator")
+root.title("Locate Goodhertz")
 
 # Center Window
 app_height = 600
@@ -107,18 +107,24 @@ error_logo = ImageTk.PhotoImage(Image.open("Images/Error.png"))
 my_error_logo = Label(error_window, image=error_logo)
 my_error_logo.pack()
 
-error_message = Label(error_window, text="Plugins not found", font=("Helvetica", 30))
+error_title = Label(error_window, text="Plugins not found", font=("Helvetica", 30))
+error_title.pack()
+
+error_message = Label(error_window, text="Click Download to install Goodhertz Plug-in Library from the web", font=("Helvetica", 15))
 error_message.pack()
 
-download_btn = Button(error_window, text="Download", font=("Helvetica", 14), command=download_btn_function)
-download_btn.pack()
+download_btn = Button(error_window, text="Download", font=("Helvetica", 14), command=lambda: download_btn_function())
+download_btn.pack(pady=25)
 
 # Installing Window
 install_logo = ImageTk.PhotoImage(Image.open("Images/Installing.png"))
 my_install_logo = Label(installing_window, image=install_logo)
 my_install_logo.pack()
 
-download_message = Label(installing_window, text="", font=("Helvetica", 30))
+download_title = Label(installing_window, text="", font=("Helvetica", 30))
+download_title.pack()
+
+download_message = Label(installing_window, text="Run Goodhertz Installer located in Downloads to complete installation", font=("Helvetica", 15))
 download_message.pack()
 
 # Completed Window
