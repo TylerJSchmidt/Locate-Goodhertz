@@ -1,87 +1,139 @@
-import tkinter as tk
 import os
+import time
+import threading
+import subprocess
 import webbrowser
+from tkinter import *
+from PIL import Image, ImageTk
 
-#GUI
-window = tk.Tk()
-window.geometry('600x500')
-window.title("Goodhertz Locator")
-window.rowconfigure(0, weight=1)
-window.columnconfigure(0, weight=1)
 
-#Frames
-welcome = tk.Frame(window)
-error = tk.Frame(window)
-downloading = tk.Frame(window)
-completed = tk.Frame(window)
+# Checks to see if the Ghz library is installed
+def ghz_library_installed():
+    ghz_plugins = [
+        'Ghz Panpot 3.component', 'Ghz Tiltshift 3.component', 'Ghz Faraday Limiter 3.component',
+        'Ghz Megaverb 3.component', 'Ghz Midside Matrix 3.component', 'Ghz Lohi 3.component',
+        'Ghz Midside 3.component', 'Ghz Vulf Compressor 3.component', 'Ghz Lossy 3.component',
+        'Ghz Tupe 3.component', 'Ghz Wow Control 3.component', 'Ghz Trem Control 3.component',
+        'Ghz Good Dither 3.component', 'Ghz CanOpener Studio 3.component', 'Ghz Tone Control 3.component'
+    ]
+    if set(ghz_plugins).issubset(os.listdir(r"/Library/Audio/Plug-Ins/Components")):
+        return True
 
-def show_frame(frame):
-    frame.tkraise()
-for frame in (welcome, error, downloading, completed):
-    frame.grid(row=0, column=0,sticky="nsew")
-show_frame(welcome)
 
-#Functions
+# If Ghz library installed it moves to the completed window. If not it moves to the error window.
+def continue_btn_function():
+    if ghz_library_installed():
+        show_frame(completed_window)
+    else:
+        show_frame(error_window)
 
-#List to compare:
-system_plugins = []
-expected_plugins = [
-    'Ghz Panpot 3.component', 'Ghz Tiltshift 3.component', 'Ghz Faraday Limiter 3.component',
-    'Ghz Megaverb 3.component', 'Ghz Midside Matrix 3.component', 'Ghz Lohi 3.component',
-    'Ghz Midside 3.component', 'Ghz Vulf Compressor 3.component', 'Ghz Lossy 3.component',
-    'Ghz Tupe 3.component', 'Ghz Wow Control 3.component', 'Ghz Trem Control 3.component',
-     'Ghz Good Dither 3.component', 'Ghz CanOpener Studio 3.component', 'Ghz Tone Control 3.component'
-]
 
-#scan_user_library() Scans the system library for installed plugins
-def scan_system_library(plugin):
-    for files in os.listdir(r"/Library/Audio/Plug-Ins/Components"):
-        if plugin in files:
-         system_plugins.append(files)
-    return system_plugins
+# Downloads Ghz library from the internet. Starts loop to test if install is complete. Moves to download window
+def download_btn_function():
+    show_frame(installing_window)
+    threading.Thread(target=ghz_library_installed_loop).start()
+    webbrowser.open("https://install.goodhertz.co/Goodhertz-Installer-3.6.2-0c0419a.pkg")
 
-#compare_libraries() Compares the list of expected plugins vs installed plugins
-def compare_librarys():
-   if expected_plugins != scan_system_library("Ghz"):
-       show_frame(error)
-   else:
-       show_frame(completed)
 
-#download_plugins() Open's safari to "https://goodhertz.co/downloads/", clears results from system_plugins, and moves to Downloading frame
-def download_plugins():
-    webbrowser.open("https://goodhertz.co/downloads/")
-    system_plugins.clear()
-    show_frame(downloading)
+# If Ghz library installed it moves to the completed window. If not displays 4 second text animation and re-runs
+def ghz_library_installed_loop():
+    if ghz_library_installed():
+        show_frame(completed_window)
+    else:
+        download_message.config(text="Downloading   ")
+        time.sleep(1)
+        download_message.config(text="Downloading.  ")
+        time.sleep(1)
+        download_message.config(text="Downloading.. ")
+        time.sleep(1)
+        download_message.config(text="Downloading...")
+        time.sleep(1)
+        ghz_library_installed_loop
 
-#show_frame() Manages which frame is currently being shown
 
-#Welcome
-welcome_message = tk.Label(welcome, text="Hello, Welcome to Goodhertz Locator", bg="grey", width=25, height=5)
-welcome_message.pack(fill='both', side=tk.TOP, expand=True)
+# Opens a finder window and shows where the plugins have been installed
+def open_finder():
+    subprocess.call(["open", "-R", "/Library/Audio/Plug-Ins/Components"])
 
-run_btn = tk.Button(welcome, text="Run", command= lambda: compare_librarys())
-run_btn.pack()
 
-#Error
-error_message = tk.Label(error, text="Plugins not found", bg="grey", width=25, height=5)
-error_message.pack(fill='both', side=tk.TOP, expand=True)
+# Root Configuration
+root = Tk()
+root.title("Goodhertz Locator")
 
-download_btn = tk.Button(error, text="Download", command=lambda: download_plugins())
+# Center Window
+app_height = 600
+app_width = 900
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+x = (screen_width / 2) - (app_width / 2)
+y = (screen_height / 2) - (app_height / 2 + 55)
+root.geometry(f"{app_width}x{app_height}+{int(x)}+{int(y)}")
+root.rowconfigure(0, weight=1)
+root.columnconfigure(0, weight=1)
+
+# Windows Configuration
+welcome_window = Frame(root)
+error_window = Frame(root)
+installing_window = Frame(root)
+completed_window = Frame(root)
+
+
+def show_frame(window):
+    window.tkraise()
+
+
+for frame in (welcome_window, error_window, installing_window, completed_window):
+    frame.grid(row=0, column=0, sticky="nsew")
+
+# Start
+show_frame(welcome_window)
+
+# Welcome Window
+logo = ImageTk.PhotoImage(Image.open("Images/Logo.png"))
+my_logo = Label(welcome_window, image=logo)
+my_logo.pack()
+
+welcome_message_title = Label(welcome_window, text="Goodhertz Locator", font=("Helvetica", 30))
+welcome_message_title.pack()
+
+welcome_message = Label(welcome_window, text="Click continue to scan your files", font=("Helvetica", 15))
+welcome_message.pack()
+
+continue_btn = Button(welcome_window, text="Continue", font=("Helvetica", 14), command=lambda: continue_btn_function())
+continue_btn.pack(pady=25)
+
+# Error Window
+error_logo = ImageTk.PhotoImage(Image.open("Images/Error.png"))
+my_error_logo = Label(error_window, image=error_logo)
+my_error_logo.pack()
+
+error_message = Label(error_window, text="Plugins not found", font=("Helvetica", 30))
+error_message.pack()
+
+download_btn = Button(error_window, text="Download", font=("Helvetica", 14), command=download_btn_function)
 download_btn.pack()
 
-#Downloading
-download_message = tk.Label(downloading, text="Downloading...", bg="grey", width=25, height=5)
-download_message.pack(fill='both', side=tk.TOP, expand=True)
+# Installing Window
+install_logo = ImageTk.PhotoImage(Image.open("Images/Installing.png"))
+my_install_logo = Label(installing_window, image=install_logo)
+my_install_logo.pack()
 
-re_run_btn = tk.Button(downloading, text="Re-run Test", command=lambda: compare_librarys())
-re_run_btn.pack()
+download_message = Label(installing_window, text="", font=("Helvetica", 30))
+download_message.pack()
 
-#Completed
-completed_message = tk.Label(completed, text="Installation completed!", bg="grey", width=25, height=5)
-completed_message.pack(fill='both', side=tk.TOP, expand=True)
+# Completed Window
+completed_logo = ImageTk.PhotoImage(Image.open("Images/Completed.png"))
+my_completed_logo = Label(completed_window, image=completed_logo)
+my_completed_logo.pack()
 
-frame4_btn = tk.Button(completed, text="Close", command=lambda: window.destroy())
-frame4_btn.pack()
+completed_message = Label(completed_window, text="Goodhertz Library Installed", font=("Helvetica", 30))
+completed_message.pack()
 
-#End
-window.mainloop()
+finder_btn = Button(completed_window, text="Show in Finder", font=("Helvetica", 14), command=lambda: open_finder())
+finder_btn.pack(side="left", padx=50)
+
+close_btn = Button(completed_window, text="   Close   ", font=("Helvetica", 14), command=lambda: root.destroy())
+close_btn.pack(side="right", padx=50)
+
+# End
+root.mainloop()
