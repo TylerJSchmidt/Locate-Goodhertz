@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89fee214-e1f3-4055-897b-cbcce29b7bee" name="Changes" comment="Updated legibilit">
+    <list default="true" id="89fee214-e1f3-4055-897b-cbcce29b7bee" name="Changes" comment="-Automated download button &#10;-Created download text automations&#10;-Added threading for loop function&#10;-Added Images to windows&#10;-Simplified functions&#10;-Updated code legibility">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Goodhertzlocator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Goodhertzlocator.py" afterDir="false" />
     </list>
@@ -84,7 +84,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631747167847</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="-Automated download button &#10;-Created download text automations&#10;-Added threading for loop function&#10;-Added Images to windows&#10;-Simplified functions&#10;-Updated code legibility">
+      <created>1632404488822</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1632404488822</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -101,6 +108,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated legibilit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated legibilit" />
+    <MESSAGE value="-Automated download button &#10;-Created download text automations&#10;-Added threading for loop function&#10;-Added Images to windows&#10;-Simplified functions&#10;-Updated code legibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="-Automated download button &#10;-Created download text automations&#10;-Added threading for loop function&#10;-Added Images to windows&#10;-Simplified functions&#10;-Updated code legibility" />
   </component>
 </project>

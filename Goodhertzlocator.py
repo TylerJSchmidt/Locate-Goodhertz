@@ -35,7 +35,7 @@ def download_btn_function():
     webbrowser.open("https://install.goodhertz.co/Goodhertz-Installer-3.6.2-0c0419a.pkg")
 
 
-# If Ghz library installed it moves to the completed window. If not displays 4 second text animation and re-runs
+# If Ghz library installed moves to the completed window. If not displays 4 second text animation and re-runs
 def ghz_library_installed_loop():
     if ghz_library_installed():
         show_frame(completed_window)
@@ -51,7 +51,7 @@ def ghz_library_installed_loop():
         ghz_library_installed_loop
 
 
-# Opens a finder window and shows where the plugins have been installed
+# Opens a finder window to /Library/Audio/Plug-Ins/Components
 def open_finder():
     subprocess.call(["open", "-R", "/Library/Audio/Plug-Ins/Components"])
 
