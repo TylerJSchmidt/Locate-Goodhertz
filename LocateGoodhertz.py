@@ -58,7 +58,7 @@ def open_finder():
 
 # Root Configuration
 root = Tk()
-root.title("Locate Goodhertz")
+root.title("")
 
 # Center Window
 app_height = 600
@@ -93,10 +93,10 @@ logo = ImageTk.PhotoImage(Image.open("Images/Logo.png"))
 my_logo = Label(welcome_window, image=logo)
 my_logo.pack()
 
-welcome_message_title = Label(welcome_window, text="Goodhertz Locator", font=("Helvetica", 30))
+welcome_message_title = Label(welcome_window, text="Locate Goodhertz", font=("Helvetica", 30))
 welcome_message_title.pack()
 
-welcome_message = Label(welcome_window, text="Click continue to scan your files", font=("Helvetica", 15))
+welcome_message = Label(welcome_window, text="Click continue to verify plug-in library is installed", font=("Helvetica", 15))
 welcome_message.pack()
 
 continue_btn = Button(welcome_window, text="Continue", font=("Helvetica", 14), command=lambda: continue_btn_function())
@@ -132,7 +132,7 @@ completed_logo = ImageTk.PhotoImage(Image.open("Images/Completed.png"))
 my_completed_logo = Label(completed_window, image=completed_logo)
 my_completed_logo.pack()
 
-completed_message = Label(completed_window, text="Goodhertz Library Installed", font=("Helvetica", 30))
+completed_message = Label(completed_window, text="Library Installed", font=("Helvetica", 30))
 completed_message.pack()
 
 finder_btn = Button(completed_window, text="Show in Finder", font=("Helvetica", 14), command=lambda: open_finder())
