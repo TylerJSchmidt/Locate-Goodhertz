@@ -89,7 +89,7 @@ for frame in (welcome_window, error_window, installing_window, completed_window)
 show_frame(welcome_window)
 
 # Welcome Window
-logo = Image.open("Images/Logo.png")
+logo = Image.open("Logo.png")
 logo = ImageTk.PhotoImage(logo)
 my_logo = Label(welcome_window, image=logo)
 my_logo.pack()
@@ -104,7 +104,7 @@ continue_btn = Button(welcome_window, text="Continue", font=("Helvetica", 14), c
 continue_btn.pack(pady=25)
 
 # Error Window
-error_logo = Image.open("Images/Error.png")
+error_logo = Image.open("Error.png")
 error_logo = ImageTk.PhotoImage(error_logo)
 my_error_logo = Label(error_window, image=error_logo)
 my_error_logo.pack()
@@ -119,7 +119,7 @@ download_btn = Button(error_window, text="Download", font=("Helvetica", 14), com
 download_btn.pack(pady=25)
 
 # Installing Window
-install_logo = Image.open("Images/Installing.png")
+install_logo = Image.open("Installing.png")
 install_logo = ImageTk.PhotoImage(install_logo)
 my_install_logo = Label(installing_window, image=install_logo)
 my_install_logo.pack()
@@ -131,7 +131,7 @@ download_message = Label(installing_window, text="Run Goodhertz Installer locate
 download_message.pack()
 
 # Completed Window
-completed_logo = Image.open("Images/Completed.png")
+completed_logo = Image.open("Completed.png")
 completed_logo = ImageTk.PhotoImage(completed_logo)
 my_completed_logo = Label(completed_window, image=completed_logo)
 my_completed_logo.pack()
