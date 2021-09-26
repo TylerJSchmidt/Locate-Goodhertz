@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89fee214-e1f3-4055-897b-cbcce29b7bee" name="Changes" comment="Updated file name and GUI wording">
+    <list default="true" id="89fee214-e1f3-4055-897b-cbcce29b7bee" name="Changes" comment="Renamed labels">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/LocateGoodhertz.py" beforeDir="false" afterPath="$PROJECT_DIR$/LocateGoodhertz.py" afterDir="false" />
     </list>
@@ -105,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632423335124</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Renamed labels">
+      <created>1632424293699</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1632424293699</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -125,6 +132,7 @@
     <MESSAGE value="-Automated download button &#10;-Created download text automations&#10;-Added threading for loop function&#10;-Added Images to windows&#10;-Simplified functions&#10;-Updated code legibility" />
     <MESSAGE value="-Adds Images" />
     <MESSAGE value="Updated file name and GUI wording" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated file name and GUI wording" />
+    <MESSAGE value="Renamed labels" />
+    <option name="LAST_COMMIT_MESSAGE" value="Renamed labels" />
   </component>
 </project>
