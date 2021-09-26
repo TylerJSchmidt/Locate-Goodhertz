@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89fee214-e1f3-4055-897b-cbcce29b7bee" name="Changes" comment="Renamed labels">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LocateGoodhertz.py" beforeDir="false" afterPath="$PROJECT_DIR$/LocateGoodhertz.py" afterDir="false" />
-    </list>
+    <list default="true" id="89fee214-e1f3-4055-897b-cbcce29b7bee" name="Changes" comment="Renamed labels" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -168,7 +165,21 @@
       <option name="project" value="LOCAL" />
       <updated>1632693933394</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Renamed labels">
+      <created>1632694374865</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1632694374865</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Renamed labels">
+      <created>1632694427853</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1632694427853</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
